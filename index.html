@@ -546,7 +546,7 @@ document.addEventListener('DOMContentLoaded', function(){
   var STATUS_URL = "https://defaultd52c9ea17c2147b182a333a74b1f74.b8.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/02/workflows/4325e9be7b594d8699065d9e6bfb4ad2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=TfOopcokw_Nx4_tj4lTeQtpRP82jUmNwxmKS6UfTSPg";
 
   // 各時段人數上限（要調整時，報名流程的條件也要一起改）
-  var SLOT_LIMITS = { "15:00-16:00": 1, "16:00-17:00": 1, "17:00-18:00": 30 };
+  var SLOT_LIMITS = { "15:00-16:00": 35, "16:00-17:00": 35, "17:00-18:00": 30 };
 
   // 讀取各時段人數，已額滿的選項反灰、不能選
   function loadSlotStatus(){
