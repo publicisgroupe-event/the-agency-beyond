@@ -9,6 +9,9 @@
 <meta property="og:image" content="logologo.png">
 <meta property="og:type" content="website">
 <title>陽獅集團《獅紀・無界》</title>
+<!-- 預先載入主視覺：只會載入符合裝置的那一張 -->
+<link rel="preload" as="image" href="2-pc.jpg" media="(min-width: 769px)">
+<link rel="preload" as="image" href="2-mb.jpg" media="(max-width: 768px)">
 <style>
 
 .event-page-wrapper *{ box-sizing: border-box; margin:0; padding:0; }
@@ -40,7 +43,7 @@
   .event-page-wrapper .section-logo img{ height: 44px; }
 }
 
-/* 2. 滿版活動主視覺區（靜態圖片，依裝置切換） */
+/* 2. 滿版活動主視覺區（<picture> 依裝置只載入一張） */
 .event-page-wrapper .section-hero{
   background-color: #000000 !important;
   display: flex;
@@ -53,14 +56,13 @@
   position: relative;
   overflow: hidden;
 }
+.event-page-wrapper .hero-media-wrap picture{ display: block; }
 .event-page-wrapper .hero-media{
   display: block;
   width: 100%;
   height: auto;
   object-fit: contain;
 }
-.event-page-wrapper .hero-media-desktop{ display: block; }
-.event-page-wrapper .hero-media-mobile{ display: none; }
 .event-page-wrapper .hero-cta-wrap{
   padding: 16px 0 56px;
   background-color: #000000 !important;
@@ -88,8 +90,6 @@
   box-shadow: 0 12px 28px rgba(188,171,120,.4);
 }
 @media (max-width: 768px){
-.event-page-wrapper .hero-media-desktop{ display: none !important; }
-.event-page-wrapper .hero-media-mobile{ display: block !important; }
 .event-page-wrapper .btn-cta{ padding: 18px 46px; font-size: 18px; letter-spacing: 2px; }
 .event-page-wrapper .hero-cta-wrap{ padding: 12px 0 48px; }
 }
@@ -184,7 +184,8 @@ pointer-events: none;
   opacity: 0.9;
 }
 
-/* 4. 《獅紀：百變》單張主圖（依裝置切換） */
+/* 4. 《獅紀：百變》單張主圖（<picture> 依裝置只載入一張） */
+.event-page-wrapper .theme-single-wrap{ display: block; }
 .event-page-wrapper .theme-single-img{
   display: block;
   width: 100%;
@@ -193,8 +194,6 @@ pointer-events: none;
   margin: 0 auto;
   border-radius: 20px;
 }
-.event-page-wrapper .theme-single-desktop{ aspect-ratio: 1024 / 723; }
-.event-page-wrapper .theme-single-mobile{ display: none; }
 
 @media (max-width: 768px){
 .event-page-wrapper .section-theme{ padding: 70px 5% 60px; }
@@ -204,12 +203,7 @@ pointer-events: none;
 .event-page-wrapper .card{ flex: 0 0 269px; }
 .event-page-wrapper .card .card-text{ font-size: 1.15rem; }
 .event-page-wrapper .theme2 .card-sub-line{ font-size: 0.9rem; }
-.event-page-wrapper .theme-single-desktop{ display: none !important; }
-.event-page-wrapper .theme-single-mobile{
-  display: block !important;
-  max-width: 683px;
-  aspect-ratio: 683 / 1024;
-}
+.event-page-wrapper .theme-single-img{ max-width: 683px; }
 }
 
 /* 5. 地址時間 + 兩顆按鈕 */
@@ -416,14 +410,16 @@ html, body{
 
   <!-- 1. 頂端 LOGO 區 -->
   <section class="section-logo">
-    <img src="logologo.png" alt="集團 Logo" />
+    <img src="logologo.png" alt="集團 Logo" fetchpriority="high" />
   </section>
 
-  <!-- 2. 滿版活動主視覺區（靜態圖片，依裝置切換） -->
+  <!-- 2. 滿版活動主視覺區：手機只下載 2-mb.jpg，桌機只下載 2-pc.jpg -->
   <section class="section-hero">
     <div class="hero-media-wrap">
-      <img class="hero-media hero-media-desktop" src="2-pc.jpg" alt="活動主視覺（桌機版）" />
-      <img class="hero-media hero-media-mobile" src="2-mb.jpg" alt="活動主視覺（手機版）" />
+      <picture>
+        <source media="(max-width: 768px)" srcset="2-mb.jpg" />
+        <img class="hero-media" src="2-pc.jpg" alt="活動主視覺" fetchpriority="high" decoding="async" />
+      </picture>
     </div>
     <div class="hero-cta-wrap">
       <button type="button" id="scrollToRegistrationBtn" class="btn-cta">立即報名</button>
@@ -458,19 +454,21 @@ html, body{
     </div>
   </section>
 
-  <!-- 4. 主題：《獅紀：百變》單張主圖 -->
+  <!-- 4. 主題：《獅紀：百變》單張主圖：手機只下載 n-4-mb.png，桌機只下載 n-4-pc.jpg -->
   <section class="section-theme theme1">
     <h2 class="theme-title">《獅紀：百變》</h2>
     <p class="theme-subtitle">更 多 驚 喜 活 動 敬 請 期 待</p>
-    <img class="theme-single-img theme-single-desktop" src="n-4-pc.jpg" alt="獅紀：百變（桌機版）" />
-    <img class="theme-single-img theme-single-mobile" src="n-4-mb.png" alt="獅紀：百變（手機版）" />
+    <picture class="theme-single-wrap">
+      <source media="(max-width: 768px)" srcset="n-4-mb.png" />
+      <img class="theme-single-img" src="n-4-pc.jpg" alt="獅紀：百變" loading="lazy" decoding="async" />
+    </picture>
   </section>
 
   <!-- 5. 地址時間 + Google Map / 交通資訊按鈕 -->
   <section class="section-story">
     <div class="story-bg">
       <div class="story-panel">
-        <img class="story-text-img" src="%E5%9C%B0%E5%9D%80%E6%99%82%E9%96%93-%E6%96%87%E5%AD%97.png" alt="活動地址時間" />
+        <img class="story-text-img" src="%E5%9C%B0%E5%9D%80%E6%99%82%E9%96%93-%E6%96%87%E5%AD%97.png" alt="活動地址時間" loading="lazy" decoding="async" />
         <div class="story-btns">
           <a class="btn-info" href="https://maps.app.goo.gl/ZDPSvBSiCi5CywAcA" target="_blank" rel="noopener noreferrer">Google Map</a>
           <a class="btn-info" href="https://tpac.org.taipei/traffic-drive" target="_blank" rel="noopener noreferrer">交通資訊</a>
