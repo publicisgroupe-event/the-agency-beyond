@@ -212,7 +212,7 @@ pointer-events: none;
 }
 }
 
-/* 5. 地址時間 + 兩顆按鈕（桌機、手機都不使用背景圖） */
+/* 5. 地址時間 + 兩顆按鈕 */
 .event-page-wrapper .section-story{
   position: relative;
   background-color: #000000 !important;
@@ -285,7 +285,7 @@ pointer-events: none;
 }
 }
 
-/* 6. Registration Form 區（自訂表單 → Power Automate → SharePoint List） */
+/* 6. Registration Form 區 */
 .event-page-wrapper .section-form{
   background-color: #0d0d0d !important;
   padding: 100px 5%;
@@ -346,6 +346,16 @@ pointer-events: none;
 }
 .event-page-wrapper .slot-option input{ width: auto; accent-color: #BCAB78; }
 .event-page-wrapper .slot-option:has(input:checked){ border-color: #BCAB78; }
+.event-page-wrapper .slot-option.is-full{
+  opacity: .45;
+  cursor: not-allowed;
+}
+.event-page-wrapper .slot-full-tag{
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: #ff8a93 !important;
+  letter-spacing: 1px;
+}
 .event-page-wrapper .btn-submit{
   width: 100%;
   padding: 15px;
@@ -469,7 +479,7 @@ html, body{
     </div>
   </section>
 
-  <!-- 6. Registration Form 區：自訂表單 → Power Automate → SharePoint List -->
+  <!-- 6. Registration Form 區 -->
   <section id="registration" class="section-form">
     <h2 class="form-title">立即報名</h2>
     <div class="form-card">
@@ -529,8 +539,48 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
-  // 第 6 區：報名表單送出 → Power Automate → SharePoint List
+  // 報名流程網址
   var FLOW_URL = "https://defaultd52c9ea17c2147b182a333a74b1f74.b8.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/9e1c1881ac414019be441114075e412f/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=IJY2fHMksIy_Ze84NjeJhlYKvE0kYt5dMaT9GixIozM";
+
+  // 名額查詢流程網址
+  var STATUS_URL = "https://defaultd52c9ea17c2147b182a333a74b1f74.b8.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/02/workflows/4325e9be7b594d8699065d9e6bfb4ad2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=TfOopcokw_Nx4_tj4lTeQtpRP82jUmNwxmKS6UfTSPg";
+
+  // 各時段人數上限（要調整時，報名流程的條件也要一起改）
+  var SLOT_LIMITS = { "15:00-16:00": 35, "16:00-17:00": 35, "17:00-18:00": 30 };
+
+  // 讀取各時段人數，已額滿的選項反灰、不能選
+  function loadSlotStatus(){
+    fetch(STATUS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: '{}'
+    })
+    .then(function(res){ return res.ok ? res.json() : null; })
+    .then(function(counts){
+      if(!counts) return;
+      document.querySelectorAll('input[name="slot"]').forEach(function(input){
+        var label = input.closest('.slot-option');
+        var used = Number(counts[input.value] || 0);
+        var full = used >= SLOT_LIMITS[input.value];
+        var tag = label.querySelector('.slot-full-tag');
+        input.disabled = full;
+        label.classList.toggle('is-full', full);
+        if(full){
+          input.checked = false;
+          if(!tag){
+            tag = document.createElement('span');
+            tag.className = 'slot-full-tag';
+            tag.textContent = '已額滿';
+            label.appendChild(tag);
+          }
+        } else if(tag){
+          tag.remove();
+        }
+      });
+    })
+    .catch(function(err){ console.error('名額查詢失敗：', err); });
+  }
+  loadSlotStatus();
 
   var form = document.getElementById('registrationForm');
   var msgBox = document.getElementById('formMessage');
@@ -545,7 +595,6 @@ document.addEventListener('DOMContentLoaded', function(){
     form.addEventListener('submit', function(e){
       e.preventDefault();
 
-      // 防止重複送出
       if(isSubmitting) return;
 
       var honeypot = document.getElementById('honeypot');
@@ -590,8 +639,10 @@ document.addEventListener('DOMContentLoaded', function(){
         if(res.ok){
           showMsg('✅ 報名成功，期待當天與您相見！', true);
           form.reset();
+          loadSlotStatus();
         } else if(res.status === 409){
           showMsg('⚠️ 此時段已額滿，請改選其他時段。', false);
+          loadSlotStatus();
         } else {
           console.error('送出失敗，狀態碼：', res.status);
           showMsg('⚠️ 報名失敗，請稍後再試一次。', false);
