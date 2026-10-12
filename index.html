@@ -369,7 +369,7 @@ pointer-events: none;
   display: none;
   padding: 14px 18px;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-top: 20px;
   text-align: center;
   font-size: 0.95rem;
 }
@@ -473,7 +473,6 @@ html, body{
   <section id="registration" class="section-form">
     <h2 class="form-title">立即報名</h2>
     <div class="form-card">
-      <div id="formMessage" class="form-message"></div>
       <form id="registrationForm" novalidate>
         <input type="text" name="website" id="honeypot" style="position:absolute; left:-9999px; top:-9999px;" tabindex="-1" autocomplete="off">
         <div class="form-group">
@@ -510,6 +509,7 @@ html, body{
         </div>
         <button type="submit" class="btn-submit">確認報名</button>
       </form>
+      <div id="formMessage" class="form-message"></div>
     </div>
   </section>
 
@@ -545,7 +545,7 @@ document.addEventListener('DOMContentLoaded', function(){
     form.addEventListener('submit', function(e){
       e.preventDefault();
 
-      // 防止重複送出（連點或重複觸發時只送一次）
+      // 防止重複送出
       if(isSubmitting) return;
 
       var honeypot = document.getElementById('honeypot');
