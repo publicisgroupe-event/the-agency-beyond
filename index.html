@@ -533,7 +533,7 @@ html, body{
           </div>
         </div>
         <div class="form-group party-group">
-          <label>是否參加18:00~21:00《獅紀：百變》萬聖節活動（必選）</label>
+          <label>是否參加18:00~21:00《獅紀：百變》萬聖節派對（必選）</label>
           <div class="slot-options">
             <label class="slot-option"><input type="radio" name="party" value="參加" /><span>參加</span></label>
             <label class="slot-option"><input type="radio" name="party" value="不參加" /><span>不參加</span></label>
@@ -637,19 +637,19 @@ document.addEventListener('DOMContentLoaded', function(){
       };
 
       if(!data.cnName || !data.enName || !data.company || !data.title || !data.email || !data.contact){
-        showMsg('⚠️ 請完整填寫所有欄位。', false);
+        showMsg('⚠️ 請完整填寫所有欄位', false);
         return;
       }
       if(!data.slot){
-        showMsg('⚠️ 請選擇預計參加時段。', false);
+        showMsg('⚠️ 請選擇預計參加時段', false);
         return;
       }
       if(!data.party){
-        showMsg('⚠️ 請選擇是否參加18:00~21:00《獅紀：百變》萬聖節活動。', false);
+        showMsg('⚠️ 請選擇是否參加18:00~21:00《獅紀：百變》萬聖節派對', false);
         return;
       }
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){
-        showMsg('⚠️ 信箱格式不正確，請再確認。', false);
+        showMsg('⚠️ 信箱格式不正確，請再確認', false);
         return;
       }
 
@@ -669,16 +669,16 @@ document.addEventListener('DOMContentLoaded', function(){
           form.reset();
           loadSlotStatus();
         } else if(res.status === 409){
-          showMsg('⚠️ 此時段已額滿，請改選其他時段。', false);
+          showMsg('⚠️ 此時段已額滿，請改選其他時段', false);
           loadSlotStatus();
         } else {
           console.error('送出失敗，狀態碼：', res.status);
-          showMsg('⚠️ 報名失敗，請稍後再試一次。', false);
+          showMsg('⚠️ 報名失敗，請稍後再試一次', false);
         }
       })
       .catch(function(err){
         console.error('發生錯誤：', err);
-        showMsg('⚠️ 網路連線異常，請稍後再試一次。', false);
+        showMsg('⚠️ 網路連線異常，請稍後再試一次', false);
       })
       .finally(function(){
         isSubmitting = false;
