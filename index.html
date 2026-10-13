@@ -340,6 +340,23 @@ pointer-events: none;
 }
 .event-page-wrapper .slot-option input{ width: auto; accent-color: #BCAB78; }
 .event-page-wrapper .slot-option:has(input:checked){ border-color: #BCAB78; }
+/* 萬聖節活動選項：較深的底色與金色框，跟時段選項區隔 */
+.event-page-wrapper .party-group{
+  margin-top: 30px;
+  padding: 18px;
+  border-radius: 12px;
+  background-color: rgba(188,171,120,.08);
+  border: 1px solid rgba(188,171,120,.35);
+}
+.event-page-wrapper .party-group > label{ color: #BCAB78 !important; }
+.event-page-wrapper .party-group .slot-option{
+  background-color: rgba(0,0,0,.45);
+  border-color: rgba(188,171,120,.45);
+}
+.event-page-wrapper .party-group .slot-option:has(input:checked){
+  background-color: rgba(188,171,120,.25);
+  border-color: #BCAB78;
+}
 .event-page-wrapper .slot-option.is-full{
   opacity: .45;
   cursor: not-allowed;
@@ -432,34 +449,34 @@ html, body{
     <p class="theme-subtitle">五 大 AI 議 題 探 索</p>
     <div class="card-carousel">
       <div class="card">
-        <img src="4-1-p.jpg" alt="無界活動一" decoding="async" />
+        <img src="4-1-p.png" alt="無界活動一" decoding="async" />
         <div class="card-text">識 ‧ 不止於見<span class="card-sub"><span class="card-sub-line">BEYOND PERSONA</span><span class="card-sub-line">所見為起點 理解於邊界之外</span></span></div>
       </div>
       <div class="card">
-        <img src="4-2-i.jpg" alt="無界活動二" decoding="async" />
+        <img src="4-2-i.png" alt="無界活動二" decoding="async" />
         <div class="card-text">獅見之境<span class="card-sub"><span class="card-sub-line">BEYOND IMAGINATION</span><span class="card-sub-line">所想 ‧ 皆能具現</span></span></div>
       </div>
       <div class="card">
-        <img src="4-3-v.jpg" alt="無界活動三" decoding="async" />
+        <img src="4-3-v.png" alt="無界活動三" decoding="async" />
         <div class="card-text">一源 ‧ ONE變<span class="card-sub"><span class="card-sub-line">BEYOND VARIATIONS</span><span class="card-sub-line">由一而生 延展萬象</span></span></div>
       </div>
       <div class="card">
-        <img src="4-4-p.jpg" alt="無界活動四" decoding="async" />
+        <img src="4-4-p.png" alt="無界活動四" decoding="async" />
         <div class="card-text">獅啟 ‧ 新序<span class="card-sub"><span class="card-sub-line">BEYOND PROCESS</span><span class="card-sub-line">不循既定 自成獅序</span></span></div>
       </div>
       <div class="card">
-        <img src="4-5-t.jpg" alt="無界活動五" decoding="async" />
+        <img src="4-5-t.png" alt="無界活動五" decoding="async" />
         <div class="card-text">共創 ‧ 無界<span class="card-sub"><span class="card-sub-line">BEYOND THE TEAM</span><span class="card-sub-line">智慧 x 專業 x 創意</span></span></div>
       </div>
     </div>
   </section>
 
-  <!-- 4. 主題：《獅紀：百變》單張主圖 -->
+  <!-- 4. 主題：《獅紀：百變》單張主圖：手機只下載 n-4-mb.png，桌機只下載 n-4-pc.jpg -->
   <section class="section-theme theme1">
     <h2 class="theme-title">《獅紀：百變》</h2>
     <p class="theme-subtitle">更 多 驚 喜 活 動 敬 請 期 待</p>
     <picture class="theme-single-wrap">
-      <source media="(max-width: 768px)" srcset="n-4-mb.jpg" />
+      <source media="(max-width: 768px)" srcset="n-4-mb.png" />
       <img class="theme-single-img" src="n-4-pc.jpg" alt="獅紀：百變" loading="lazy" decoding="async" />
     </picture>
   </section>
@@ -468,7 +485,7 @@ html, body{
   <section class="section-story">
     <div class="story-bg">
       <div class="story-panel">
-        <img class="story-text-img" src="%E5%9C%B0%E5%9D%80%E6%99%82%E9%96%93-%E6%96%87%E5%AD%97.jpg" alt="活動地址時間" loading="lazy" decoding="async" />
+        <img class="story-text-img" src="%E5%9C%B0%E5%9D%80%E6%99%82%E9%96%93-%E6%96%87%E5%AD%97.png" alt="活動地址時間" loading="lazy" decoding="async" />
         <div class="story-btns">
           <a class="btn-info" href="https://maps.app.goo.gl/ZDPSvBSiCi5CywAcA" target="_blank" rel="noopener noreferrer">Google Map</a>
           <a class="btn-info" href="https://tpac.org.taipei/traffic-drive" target="_blank" rel="noopener noreferrer">交通資訊</a>
@@ -510,9 +527,15 @@ html, body{
         <div class="form-group">
           <label>預計參加時段（必選）</label>
           <div class="slot-options">
-            <label class="slot-option"><input type="radio" name="slot" value="15:00-16:00" /><span>15:00 – 16:00</span></label>
             <label class="slot-option"><input type="radio" name="slot" value="16:00-17:00" /><span>16:00 – 17:00</span></label>
             <label class="slot-option"><input type="radio" name="slot" value="17:00-18:00" /><span>17:00 – 18:00</span></label>
+          </div>
+        </div>
+        <div class="form-group party-group">
+          <label>是否參加 18:00 – 21:00 萬聖節活動（必選）</label>
+          <div class="slot-options">
+            <label class="slot-option"><input type="radio" name="party" value="參加" /><span>參加</span></label>
+            <label class="slot-option"><input type="radio" name="party" value="不參加" /><span>不參加</span></label>
           </div>
         </div>
         <button type="submit" class="btn-submit">確認報名</button>
@@ -544,7 +567,7 @@ document.addEventListener('DOMContentLoaded', function(){
   var STATUS_URL = "https://defaultd52c9ea17c2147b182a333a74b1f74.b8.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/02/workflows/4325e9be7b594d8699065d9e6bfb4ad2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=TfOopcokw_Nx4_tj4lTeQtpRP82jUmNwxmKS6UfTSPg";
 
   // 各時段人數上限（要調整時，報名流程的條件也要一起改）
-  var SLOT_LIMITS = { "15:00-16:00": 35, "16:00-17:00": 35, "17:00-18:00": 30 };
+  var SLOT_LIMITS = { "16:00-17:00": 50, "17:00-18:00": 50 };
 
   // 讀取各時段人數，已額滿的選項反灰、不能選
   function loadSlotStatus(){
@@ -599,6 +622,7 @@ document.addEventListener('DOMContentLoaded', function(){
       if(honeypot && honeypot.value !== '') return;
 
       var checkedSlot = form.querySelector('input[name="slot"]:checked');
+      var checkedParty = form.querySelector('input[name="party"]:checked');
 
       var data = {
         cnName: document.getElementById('cnName').value.trim(),
@@ -607,7 +631,8 @@ document.addEventListener('DOMContentLoaded', function(){
         title: document.getElementById('title').value.trim(),
         email: document.getElementById('email').value.trim(),
         contact: document.getElementById('contact').value.trim(),
-        slot: checkedSlot ? checkedSlot.value : ''
+        slot: checkedSlot ? checkedSlot.value : '',
+        party: checkedParty ? checkedParty.value : ''
       };
 
       if(!data.cnName || !data.enName || !data.company || !data.title || !data.email || !data.contact){
@@ -616,6 +641,10 @@ document.addEventListener('DOMContentLoaded', function(){
       }
       if(!data.slot){
         showMsg('⚠️ 請選擇預計參加時段。', false);
+        return;
+      }
+      if(!data.party){
+        showMsg('⚠️ 請選擇是否參加 18:00–21:00 萬聖節活動。', false);
         return;
       }
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){
