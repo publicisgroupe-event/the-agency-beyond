@@ -119,13 +119,13 @@ position: relative;
   margin-bottom: 56px;
 }
 
-/* 3. 《獅紀：無界》卡片輪播 */
+/* 3. 《獅紀：無界》純圖片卡片輪播（圖片比例 1000:1684） */
 .event-page-wrapper .theme2::after{
 content: '';
 position: absolute;
 top: 130px;
 right: 0;
-bottom: 134px;
+bottom: 110px;
 width: 80px;
 background: linear-gradient(to right, transparent, #000000);
 pointer-events: none;
@@ -148,41 +148,13 @@ pointer-events: none;
   scroll-snap-align: start;
   border-radius: 28px;
   overflow: hidden;
-  position: relative;
-  aspect-ratio: 3 / 4;
-  display: flex;
-  flex-direction: column;
+  aspect-ratio: 1000 / 1684;
+  background-color: rgba(255,255,255,.08);
 }
 .event-page-wrapper .card img{
   width: 100%;
-  height: 62%;
+  height: 100%;
   object-fit: cover;
-  background-color: rgba(255,255,255,.08);
-}
-.event-page-wrapper .card .card-text{
-  flex: 1;
-  padding: 18px 20px;
-  font-size: 1.25rem;
-  line-height: 1.5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.event-page-wrapper .theme2 .card{ background-color: #BCAB78 !important; }
-.event-page-wrapper .theme2 .card .card-text{ color: #ffffff !important; }
-.event-page-wrapper .theme2 .card-sub{
-  display: block;
-  width: 100%;
-  margin-top: 6px;
-}
-.event-page-wrapper .theme2 .card-sub-line{
-  display: block;
-  width: 100%;
-  font-size: 1rem;
-  line-height: 1.4;
-  opacity: 0.9;
 }
 
 /* 4. 《獅紀：百變》單張主圖 */
@@ -201,9 +173,7 @@ pointer-events: none;
 .event-page-wrapper .theme2::after{ display: none; }
 .event-page-wrapper .theme-title{ font-size: 1.6rem; letter-spacing: 3px; margin-bottom: 10px; }
 .event-page-wrapper .theme-subtitle{ font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 36px; }
-.event-page-wrapper .card{ flex: 0 0 269px; }
-.event-page-wrapper .card .card-text{ font-size: 1.15rem; }
-.event-page-wrapper .theme2 .card-sub-line{ font-size: 0.9rem; }
+.event-page-wrapper .card{ flex: 0 0 72%; border-radius: 22px; }
 .event-page-wrapper .theme-single-img{ max-width: 683px; }
 }
 
@@ -444,31 +414,16 @@ html, body{
     </div>
   </section>
 
-  <!-- 3. 主題：《獅紀：無界》卡片輪播 -->
+  <!-- 3. 主題：《獅紀：無界》純圖片卡片輪播 -->
   <section class="section-theme theme2">
     <h2 class="theme-title">《獅紀：無界》</h2>
     <p class="theme-subtitle">五 大 AI 議 題 探 索</p>
     <div class="card-carousel">
-      <div class="card">
-        <img src="4-1-p.jpg" alt="無界活動一" decoding="async" />
-        <div class="card-text">識 ‧ 不止於見<span class="card-sub"><span class="card-sub-line">BEYOND PERSONA</span><span class="card-sub-line">所見為起點 理解始於對話</span></span></div>
-      </div>
-      <div class="card">
-        <img src="4-2-i.jpg" alt="無界活動二" decoding="async" />
-        <div class="card-text">創想 ‧ 越界有度<span class="card-sub"><span class="card-sub-line">BEYOND IMAGINATION</span><span class="card-sub-line">讓實現跟上想像 創意安心越界</span></span></div>
-      </div>
-      <div class="card">
-        <img src="4-3-v.jpg" alt="無界活動三" decoding="async" />
-        <div class="card-text">因人感 ‧ 應<span class="card-sub"><span class="card-sub-line">BEYOND VARIATIONS</span><span class="card-sub-line">感知於人 回應於意</span></span></div>
-      </div>
-      <div class="card">
-        <img src="4-4-p.jpg" alt="無界活動四" decoding="async" />
-        <div class="card-text">獅啟 ‧ 新序<span class="card-sub"><span class="card-sub-line">BEYOND PROCESS</span><span class="card-sub-line">不循既定 自成獅序</span></span></div>
-      </div>
-      <div class="card">
-        <img src="4-5-t.jpg" alt="無界活動五" decoding="async" />
-        <div class="card-text">共創 ‧ 無界<span class="card-sub"><span class="card-sub-line">BEYOND MARKETING</span><span class="card-sub-line">讓專業智慧 為行銷而碰撞</span></span></div>
-      </div>
+      <div class="card"><img src="4-1-p.jpg" alt="識 ‧ 不止於見 BEYOND PERSONA" decoding="async" /></div>
+      <div class="card"><img src="4-2-i.jpg" alt="創想 ‧ 越界有度 BEYOND IMAGINATION" decoding="async" /></div>
+      <div class="card"><img src="4-3-v.jpg" alt="因人感 ‧ 應 BEYOND VARIATIONS" decoding="async" /></div>
+      <div class="card"><img src="4-4-p.jpg" alt="獅啟 ‧ 新序 BEYOND PROCESS" decoding="async" /></div>
+      <div class="card"><img src="4-5-t.jpg" alt="共創 ‧ 無界 BEYOND MARKETING" decoding="async" /></div>
     </div>
   </section>
 
